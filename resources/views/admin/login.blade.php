@@ -1,123 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Log In | Sar Thin Kyaung</title>
-
-    <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
+    <title>Admin Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- global level css -->
+    <link href="http://demo.joshadmin.com/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- end of global level css -->
+    <!-- page level css -->
+    <link href="{{asset('/assets/css/login.css')}}" rel="stylesheet"/>
+    <link href="http://demo.joshadmin.com/assets/vendors/iCheck/css/minimal/blue.css" rel="stylesheet"/>
+    <link href="http://demo.joshadmin.com/assets/vendors/bootstrapvalidator/css/bootstrapValidator.min.css" rel="stylesheet"/>
+    <!-- styles of the page ends-->
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Sar Thin Kyaung
-                    </a>
+<div class="container">
+    <div class="row vertical-offset-100">
+        <div class=" col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3  col-md-5 col-md-offset-4 col-lg-4 col-lg-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Sign In</h3>
                 </div>
+                <div class="panel-body">
+                    <form action="{{ url('/login') }}" id="authentication" autocomplete="on" method="post" role="form">
+                        <!-- CSRF Token -->
+                        <input type="hidden" name="_token" value="{{csrf_token()}}"/>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    
-                </div>
-            </div>
-        </nav>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Login</div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                                {{ csrf_field() }}
-
-                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                                    <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                        @if ($errors->has('email'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('email') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="col-md-4 control-label">Password</label>
-
-                                    <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control" name="password" required>
-
-                                        @if ($errors->has('password'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-6 col-md-offset-4">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : ''}}> Remember Me
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-8 col-md-offset-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            Login
-                                        </button>
-
-                                        <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                            Forgot Your Password?
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="form-group ">
+                            <input class="form-control" placeholder="E-mail" name="email" type="text" value=""/>
+                            <div class="help-block">
+                                
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group ">
+                            <input class="form-control" placeholder="Password" name="password" type="password"/>
+                            <div class="help-block">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input name="remember-me" type="checkbox" value="Remember Me" class="minimal-blue"/>
+                                Remember Me
+                            </label>
+                        </div>
+
+                        <input type="submit" value="Sign In" class="btn btn-primary btn-block btn-lg"/>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+</div>
+<!-- global js -->
+<script src="http://demo.joshadmin.com/assets/js/app.js" type="text/javascript"></script>
+<!-- end of global js -->
+<!-- begining of page level js-->
+<!-- <script src="http://demo.joshadmin.com/assets/js/TweenLite.min.js"></script> -->
+<script src="http://demo.joshadmin.com/assets/vendors/iCheck/js/icheck.js" type="text/javascript"></script>
+<script src="http://demo.joshadmin.com/assets/vendors/bootstrapvalidator/js/bootstrapValidator.min.js" type="text/javascript"></script>
+<script src="http://demo.joshadmin.com/assets/js/pages/login2.js" type="text/javascript"></script>
+<!-- end of page level js-->
 </body>
 </html>

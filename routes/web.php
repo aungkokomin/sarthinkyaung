@@ -43,5 +43,17 @@ Route::group(array('prefix' => 'admin'), function () {
 		return view('admin.bootstrap-elements');
 	});
 
+	Route::get('/bootstrap-grid',function(){
+		return view('admin.bootstrap-grid');
+	});
+
+	Route::get('/blank-page',function(){
+		return view('admin.blank-page');
+	});
+
+	Route::get('/rtl',function(){
+		return view('admin.index-rtl');
+	});
+
 	Route::get('/login','AuthController@admin_login');
 });

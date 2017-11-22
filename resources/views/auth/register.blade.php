@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('style')
+<title>Register | Sar Thin Kyaung</title>
+@endsection
 @section('content')
 <div class="container">
     <div class="row">
@@ -33,6 +35,90 @@
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Address</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="address" class="form-control" name="address" value="{{ old('address') }}" required>
+
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Date of Birth</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="DOB" value="{{ old('DOB') }}" required>
+
+                                @if ($errors->has('DOB'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('DOB') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Phone Number</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
+
+                                @if ($errors->has('phone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">NRC</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="nrc" value="{{ old('nrc') }}" required>
+
+                                @if ($errors->has('nrc'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nrc') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Gender</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="gender" value="{{ old('gender') }}" required>
+
+                                @if ($errors->has('gender'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Interest Field</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="interested_field" value="{{ old('interested_field') }}" required>
+
+                                @if ($errors->has('interested_field'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('interested_field') }}</strong>
                                     </span>
                                 @endif
                             </div>
