@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -15,6 +16,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        $category = Category::get();
+
+        return view('admin.category.index',compact('category'));
     }
 
     /**
@@ -25,6 +29,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        return view('admin.category.create');
     }
 
     /**
@@ -33,9 +38,13 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         //
+        $category = new Category($request->except('_token'));
+        $category->save();
+        return redirect('/admin/category')->with('success',trans('category/message.success.create'));
+
     }
 
     /**
@@ -47,6 +56,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
+        return view('admin.category.show',compact('category'));
     }
 
     /**
@@ -58,6 +68,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //
+        return view('admin.category.edit',compact('category'));
     }
 
     /**
@@ -70,6 +81,8 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $category->update($request->except('_token'));
+        return redirect('admin/category')->with('success',trans('category/message.success.update'));
     }
 
     /**
@@ -81,5 +94,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+        $catgory->delete();
+        return redirect('admin/category')->with('success',trans('category/message.success.delete'));
     }
 }
