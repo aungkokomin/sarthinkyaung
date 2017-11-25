@@ -11,7 +11,7 @@ class SubCategory extends Model
     protected $fillable = ['name','description','category_id'];
 
     function course(){
-    	return $this->hasMany('App\CategoryCourse');
+    	return $this->hasMany('App\Course');
     }
 
     function category(){

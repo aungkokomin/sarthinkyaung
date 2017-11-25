@@ -1,4 +1,8 @@
 @extends('admin.master')
+@section('title') Course @endsection
+@section('style')
+<link href="{{asset('css/jquery-ui.min.css')}}" rel="stylesheet">
+@endsection
 @section('content')
 
 <!-- Main content -->
@@ -6,16 +10,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Sub-Category Create</div>
+                <div class="panel-heading">Course Create</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('admin/course/create') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('admin/course/create') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Sub-Category Name</label>
+                            <label for="title" class="col-md-4 control-label">Course Title</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus placeholder="Sub-Category Name">
+                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus placeholder="Course Title">
 
                                 @if ($errors->has('title'))
                                     <span class="help-block">
@@ -29,7 +33,8 @@
                             <label for="lecturer" class="col-md-4 control-label">Lecturer</label>
 
                             <div class="col-md-6">
-                                <input class="form-control" type="text" name="lecturer_id" value="{{$lecturer['name']}}" readonly>
+                                <input class="form-control" type="text" value="{{Auth::user()->name}}" readonly>
+                                <input type="hidden" name="lecturer_id" value="{{Auth::user()->id}}">
 
                                 @if ($errors->has('lecturer'))
                                     <span class="help-block">
@@ -76,7 +81,7 @@
                             <label for="start_date" class="col-md-4 control-label">Start Date</label>
 
                             <div class="col-md-6">
-                                <input id="start_date" type="text" class="form-control" name="start_date" value="{{ date('Y-m-d') }}" required>
+                                <input id="datepicker" type="text" class="form-control" name="start_date" required>
 
                                 @if ($errors->has('start_date'))
                                     <span class="help-block">
@@ -87,7 +92,7 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('duration') ? ' has-error' : '' }}">
-                            <label for="duration" class="col-md-4 control-label">Duration</label>
+                            <label for="duration" class="col-md-4 control-label">Duration (Days)</label>
 
                             <div class="col-md-6">
                                 <input id="duration" type="text" class="form-control" name="duration" value="" required>
@@ -101,7 +106,7 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('course_fee') ? ' has-error' : '' }}">
-                            <label for="course_fee" class="col-md-4 control-label">Duration</label>
+                            <label for="course_fee" class="col-md-4 control-label">Course Fee</label>
 
                             <div class="col-md-4">
                                 <input id="course_fee" type="text" class="form-control" name="course_fee" value="" required>
@@ -112,7 +117,21 @@
                                     </span>
                                 @endif
                             </div>
-                            <p>Kyats</p>
+                            <label>Kyats</label>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('img') ? ' has-error' : '' }}">
+                            <label for="img" class="col-md-4 control-label">Course Image</label>
+
+                            <div class="col-md-6">
+                                <input type="file" class="image" name="img" value="" required>
+
+                                @if ($errors->has('img'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('img') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -129,4 +148,17 @@
     </div>
     <!-- row-->
 </div>
+@endsection
+@section('script')
+<script src="{{asset('js/jquery.js')}}"></script>
+<script src="{{asset('js/jquery-ui.min.js')}}"></script>
+<script>
+        $(function() {
+            $('#datepicker').datepicker({ 
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
 @endsection

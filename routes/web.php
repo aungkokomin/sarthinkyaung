@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+
+Route::get('/index', 'HomeController@index');
+Route::get('/category/{category}/browse','HomeController@categorized');
 
 Route::get('lecturer/enquiry','LecturerController@create');
 Route::post('lecturer/enquiry','LecturerController@store');
@@ -21,13 +22,19 @@ Route::post('lecturer/enquiry','LecturerController@store');
 Auth::routes();
 Route::get('/logout',function(){
 	Auth::logout();
-	return redirect('admin/login');
+	return redirect('/login');
 });
 
 Route::get('/home', 'HomeController@index');
+	
 Route::group(array('prefix' => 'admin'), function () {
 	Route::get('/',function(){
 		return view('admin.index');
+	});
+
+	Route::get('/logout',function(){
+		Auth::logout();
+		return redirect('admin/login');
 	});
 
 	Route::group(array('prefix' => 'category'), function () {

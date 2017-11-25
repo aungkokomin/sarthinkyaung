@@ -1,4 +1,5 @@
 @extends('admin.master')
+@section('title') Course @endsection
 @section('style')
 <style type="text/css">
         .status_view
@@ -69,8 +70,9 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
+                                        <th>Lecturer</th>
                                         <th>Main Category Name</th>
-                                        <th>Description</th>
+                                        <th>Duration</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -78,9 +80,10 @@
                                     @foreach($course as $courses)
                                     <tr>
                                         <td>{{$courses->id}}</td>
-                                        <td>{{$courses->name}}</td>
+                                        <td>{{$courses->title}}</td>
+                                        <td>{{$courses->lecturer->name}}</td>
                                         <td>{{$courses->category->name}}</td>
-                                        <td>{{$courses->description}}</td>
+                                        <td>{{$courses->duration}}</td>
                                         <td>
                                         <a class="btn btn-primary" href="{{URL::to('admin/course/'.$courses->id.'/edit')}}">
                                             Edit

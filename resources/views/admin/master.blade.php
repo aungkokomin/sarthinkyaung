@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sar Thin Kyaung</title>
+    <title>@yield('title') | Sar Thin Kyaung</title>
+    @yield('style')
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -29,7 +30,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    
 </head>
 
 <body>
@@ -109,11 +110,11 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{{url('user/profile')}}"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <a href="{{url('admin/user/profile')}}"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="{{url('/logout')}}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="{{url('admin/logout')}}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -135,10 +136,10 @@
                         <a href="{{url('admin/course')}}"><i class="fa fa-fw fa-edit"></i> Course</a>
                     </li>
                     <li>
-                        <a href="{{url('admin/lecture')}}"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                        <a href="{{url('admin/lecturer')}}"><i class="fa fa-fw fa-desktop"></i>Lecturer</a>
                     </li>
                     <li>
-                        <a href="{{url('admin/bootstrap-grid')}}"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                        <a href="{{url('admin/lecture')}}"><i class="fa fa-fw fa-wrench"></i>Lecture-Video</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
@@ -176,7 +177,7 @@
     <script src="{{asset('assets/js/plugins/morris/raphael.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/morris/morris.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/morris/morris-data.js')}}"></script>
-
+    @yield('script')
 </body>
 
 </html>

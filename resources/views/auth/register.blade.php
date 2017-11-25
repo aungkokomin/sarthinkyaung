@@ -5,17 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>Register | Sar Thin Kyaung</title>
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="{{asset('css/jquery-ui.min.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
+    </script>
+    <!-- <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript">
+        $('.datepicker').datepicker();
+    </script> -->
+    <!-- <script type="text/javascript">
+        $(document).ready(function() {
+            $("#departing").datepicker();
+            $("#returning").datepicker();
+            
+        });
+    </script> -->
+    <script src="/js/app.js"></script>
+    <script src="{{asset('js/jquery.js')}}"></script>
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script>
+        $(function() {
+            $( "#datepicker" ).datepicker({ 
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
     </script>
 </head>
 <body>
@@ -49,7 +76,6 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -76,16 +102,6 @@
             </div>
         </nav>
 </div>
-    <script src="/js/app.js"></script>
-    <script src="{{asset('js/jquery.js')}}"></script>
-    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
-      <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-  </script>
-</body>
-</html>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -123,11 +139,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="address" class="form-control" name="address" value="{{ old('address') }}" required>
+                                <input type="address" class="form-control" name="address" value="{{ old('address') }}" required>
 
                                 @if ($errors->has('address'))
                                     <span class="help-block">
@@ -137,11 +153,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('DOB') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">Date of Birth</label>
 
                             <div class="col-md-6">
-                                <input id="date" type="text" class="form-control" name="DOB" value="{{ old('DOB') }}" required>
+                                <input id="datepicker" type="text" class="form-control" name="DOB" value="{{ old('DOB') }}" required>
 
                                 @if ($errors->has('DOB'))
                                     <span class="help-block">
@@ -151,7 +167,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">Phone Number</label>
 
                             <div class="col-md-6">
@@ -165,7 +181,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('nrc') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">NRC</label>
 
                             <div class="col-md-6">
@@ -179,22 +195,27 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">Gender</label>
 
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="gender" value="{{ old('gender') }}" required>
-
+                            <div class="col-md-2">
+                                <label class="col-md-6 control-label">Male</label>
+                                <input type="radio" class="radio col-md-4" name="gender" value="male" placeholder="Male">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-md-4 control-label">Female</label>
+                                <input type="radio" class="radio col-md-4" name="gender" value="female" placeholder="Male">
+                            </div>
                                 @if ($errors->has('gender'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('gender') }}</strong>
                                     </span>
                                 @endif
-                            </div>
+                            
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Interest Field</label>
+                        <div class="form-group{{ $errors->has('interested_field') ? ' has-error' : '' }}">
+                            <label for="interested_field" class="col-md-4 control-label">Interest Field</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="interested_field" value="{{ old('interested_field') }}" required>

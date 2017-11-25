@@ -45,6 +45,15 @@ class CourseController extends Controller
     {
         //
         $course = new Course($request->except('_token'));
+        if ($file = $request->file('img')) {
+            $fileName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension() ?: 'png';
+            $folderName = '/uploads/course/';
+            $destinationPath = public_path() . $folderName;
+            $safeName = str_random(10) . '.' . $extension;
+            $file->move($destinationPath, $safeName);
+            $course['img'] = $safeName;
+        }
         $course->save();
         return redirect('/admin/course')->with('success',trans('course/message.success.create'));
     }
@@ -69,6 +78,8 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         //
+        $subcategory = SubCategory::get();
+        return view('admin.course.edit',compact('course','subcategory'));
     }
 
     /**
@@ -81,8 +92,17 @@ class CourseController extends Controller
     public function update(Request $request, Course $course)
     {
         //
-        $course->update($request->except('_token'));
-        return redirect('/admin/course')->with('success',trans('course/message.success.create'));
+        if ($file = $request->file('img')) {
+            $fileName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension() ?: 'png';
+            $folderName = '/uploads/course/';
+            $destinationPath = public_path() . $folderName;
+            $safeName = str_random(10) . '.' . $extension;
+            $file->move($destinationPath, $safeName);
+        }
+        $course->img = $safeName;
+        $course->update($request->except('_token','img'));
+        return redirect('/admin/course')->with('success',trans('course/message.success.edit'));
     }
 
     /**

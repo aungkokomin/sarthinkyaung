@@ -62,10 +62,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        foreach ($data as $key => $value) {
+            if($key !== '_token' && $key !== 'password_confirmation'){
+                if($key == 'password'){
+                    $user[$key] = bcrypt($value);
+                }else{
+                    $user[$key] = $value;
+                }
+            }
+        }
+        return User::create($user);
     }
 }

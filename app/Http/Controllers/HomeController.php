@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Course;
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -22,7 +24,16 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('home');
+    {   
+        $course = Course::get();
+        $category = Category::get();
+        return view('home',compact('course','category'));
+    }
+
+    public function categorized($category)
+    {   
+        $course = Course::join('sub_categories','sub_categories.id','=','courses.category_id')->where('sub_categories.category_id',$category)->get();
+        $category = Category::get();
+        return view('category_course',compact('course','category'));
     }
 }
