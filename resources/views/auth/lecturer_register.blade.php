@@ -58,7 +58,7 @@
                             <label for="email" class="col-md-4 control-label">Date of Birth</label>
 
                             <div class="col-md-6">
-                                <input id="date" type="text" class="form-control" name="DOB" value="{{ old('DOB') }}" required>
+                                <input type="text" class="form-control" name="DOB" value="{{ old('DOB') }}" required>
 
                                 @if ($errors->has('DOB'))
                                     <span class="help-block">
@@ -145,7 +145,6 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-                        <input type="hidden" name="user_role" value="user">
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
@@ -160,11 +159,4 @@
         </div>
     </div>
 </div>
-<script src="{{asset('assets/js/jquery.js')}}"></script>
-<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
-<script>
-  $( function() {
-    $( "#date" ).datepicker();
-  } );
-</script>
 @endsection
